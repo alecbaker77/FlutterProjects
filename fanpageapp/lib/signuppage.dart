@@ -26,7 +26,6 @@ class _SignUpPageState extends State<SignUpPage> {
       User? firestoreUser = FirebaseAuth.instance.currentUser;
 
       if (firestoreUser != null){
-        print("saving to firestore");
         DateTime currentPhoneDate = DateTime.now(); //DateTime
         Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate); //To TimeStamp
         DateTime myDateTime = myTimeStamp.toDate();
@@ -54,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController _lastNameController = TextEditingController();
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,8 +135,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           email: _emailController.text,
                           password: _passwordController.text,
                           role: 'customer',
-                          context: context);
-                      print(user);
+                          context: context
+                      );
 
                       if (user != null){
                         Navigator.of(context).pushReplacement(

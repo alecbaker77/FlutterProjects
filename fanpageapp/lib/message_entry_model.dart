@@ -1,15 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fanpageapp/diary_entry_button.dart';
-import 'package:fanpageapp/message_card.dart';
-import 'package:fanpageapp/top_bar_title.dart';
-import 'package:fanpageapp/diary_entry_model.dart';
-import 'package:fanpageapp/pop_up_menu.dart';
-import 'package:fanpageapp/diary_entry_page.dart';
 
-class DiaryEntry {
+
+class MessageEntry {
    String body;
    String id;
-  DiaryEntry({
+  MessageEntry({
     required this.body,
     required this.id,
   });
@@ -26,8 +21,8 @@ class DiaryEntry {
     };
   }
 
-  factory DiaryEntry.fromDoc(QueryDocumentSnapshot doc) {
-    return DiaryEntry(
+  factory MessageEntry.fromDoc(QueryDocumentSnapshot doc) {
+    return MessageEntry(
       body: doc['body'],
       id: doc.id,
     );

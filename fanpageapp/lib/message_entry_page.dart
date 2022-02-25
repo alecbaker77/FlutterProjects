@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/diary_entry_button.dart';
-import 'package:fanpageapp/message_card.dart';
-import 'package:fanpageapp/top_bar_title.dart';
-import 'package:fanpageapp/diary_entry_model.dart';
-import 'package:fanpageapp/pop_up_menu.dart';
-import 'package:fanpageapp/diary_entry_page.dart';
+import 'package:fanpageapp/message_entry_button.dart';
+import 'package:fanpageapp/message_entry_model.dart';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DiaryEntryPage extends StatefulWidget {
-  const DiaryEntryPage({
+class MessageEntryPage extends StatefulWidget {
+  const MessageEntryPage({
     Key? key,
-    this.diaryAction,
-    this.diaryEntry,
+    this.messageAction,
+    this.messageEntry,
   }) : super(key: key);
 
 
-  const DiaryEntryPage.edit(
-      {Key? key, this.diaryAction = DiaryAction.edit, this.diaryEntry})
+  const MessageEntryPage.edit(
+      {Key? key, this.messageAction = MessageAction.edit, this.messageEntry})
       : super(key: key);
 
-  const DiaryEntryPage.add(
-      {Key? key, this.diaryAction = DiaryAction.add, this.diaryEntry})
+  const MessageEntryPage.add(
+      {Key? key, this.messageAction = MessageAction.add, this.messageEntry})
       : super(key: key);
 
-  const DiaryEntryPage.read(
-      {Key? key, this.diaryAction = DiaryAction.read, this.diaryEntry})
+  const MessageEntryPage.read(
+      {Key? key, this.messageAction = MessageAction.read, this.messageEntry})
       : super(key: key);
 
-  final DiaryEntry? diaryEntry;
+  final MessageEntry? messageEntry;
 
-  final DiaryAction? diaryAction;
+  final MessageAction? messageAction;
 
   @override
-  _DiaryEntryPageState createState() => _DiaryEntryPageState();
+  _MessageEntryPageState createState() => _MessageEntryPageState();
 }
 
-class _DiaryEntryPageState extends State<DiaryEntryPage> {
+class _MessageEntryPageState extends State<MessageEntryPage> {
   TextEditingController bodyTextController = TextEditingController();
   bool isReadOnly = true;
 
@@ -60,7 +57,7 @@ class _DiaryEntryPageState extends State<DiaryEntryPage> {
   }
   @override
   void initState() {
-    bodyTextController = TextEditingController(text: widget.diaryEntry?.body ?? '');
+    bodyTextController = TextEditingController(text: widget.messageEntry?.body ?? '');
     _checkRole();
 
     super.initState();
@@ -81,7 +78,7 @@ class _DiaryEntryPageState extends State<DiaryEntryPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 TextField(
                   readOnly: false,
                   controller: bodyTextController,
@@ -99,7 +96,7 @@ class _DiaryEntryPageState extends State<DiaryEntryPage> {
                         //.copyWith(color: Colors.grey.shade400),
                   ),
                 ),
-                SizedBox(height: 100)
+                const SizedBox(height: 100)
               ],
             ),
           ),
@@ -107,8 +104,8 @@ class _DiaryEntryPageState extends State<DiaryEntryPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: isReadOnly
-          ? SizedBox()
-          : DiaryEntryButton(
+          ? const SizedBox()
+          : MessageEntryButton(
               bodyTextController: bodyTextController,
               widget: widget,
             ),
@@ -122,4 +119,4 @@ class _DiaryEntryPageState extends State<DiaryEntryPage> {
   }
 }
 
-enum DiaryAction { edit, add, read }
+enum MessageAction { edit, add, read }

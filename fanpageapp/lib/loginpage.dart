@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fanpageapp/transitionpage.dart';
 import 'package:fanpageapp/signuppage.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LogInPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
 
-  AccessToken? _accessToken;
+  //AccessToken? _accessToken;
 
   Future<bool> _signInWithFacebook() async{
     final LoginResult result = await FacebookAuth.instance.login(); // by default we request the email and the public profile
@@ -55,13 +55,13 @@ class _LogInPageState extends State<LogInPage> {
     TextEditingController _passwordController = TextEditingController();
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Alec Baker Fanpage",
+                  "Alec Baker's Fanpage",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 28.0,

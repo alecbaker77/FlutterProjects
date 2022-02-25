@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fanpageapp/diary_entry_model.dart';
+import 'package:fanpageapp/message_entry_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:fanpageapp/loginpage.dart';
@@ -33,18 +33,16 @@ class _MyHomePageState extends State<MyHomePage> {
         .doc(user?.uid)
         .get();
     role = snap['role'];
-    print(role + "1");
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final diaryEntries = Provider.of<List<DiaryEntry>>(context);
+    final messageEntries = Provider.of<List<MessageEntry>>(context);
     if (role == "admin") {
-      print(role + "2");
       return Scaffold(
         appBar: AppBar(
-          bottom: PreferredSize(
+          bottom: const PreferredSize(
             preferredSize: Size.fromHeight(94.0),
             child: TopBarTitle("Alec Baker's Fanpage"),
           ),
@@ -55,17 +53,14 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width * 3 / 5,
             child: ListView(
               children: <Widget>[
-                SizedBox(height: 40),
-                if (diaryEntries != null)
-                  for (var diaryData in diaryEntries)
-                    MessageCard(diaryEntry: diaryData),
-                if (diaryEntries == null)
-                  Center(child: CircularProgressIndicator()),
+                const SizedBox(height: 40),
+                for (var messageData in messageEntries)
+                  MessageCard(messageEntry: messageData),
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
                         text: 'Log Out',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.blue,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -94,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print(role + "3");
       return Scaffold(
         appBar: AppBar(
-          bottom: PreferredSize(
+          bottom: const PreferredSize(
             preferredSize: Size.fromHeight(94.0),
             child: TopBarTitle("Alec Baker's Fanpage"),
           ),
@@ -105,17 +100,14 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width * 3 / 5,
             child: ListView(
               children: <Widget>[
-                SizedBox(height: 40),
-                if (diaryEntries != null)
-                  for (var diaryData in diaryEntries)
-                    MessageCard(diaryEntry: diaryData),
-                if (diaryEntries == null)
-                  Center(child: CircularProgressIndicator()),
+                const SizedBox(height: 40),
+                for (var messageData in messageEntries)
+                    MessageCard(messageEntry: messageData),
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
                         text: 'Log Out',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.blue,
                         ),
                         recognizer: TapGestureRecognizer()

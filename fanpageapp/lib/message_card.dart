@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/diary_entry_button.dart';
-import 'package:fanpageapp/message_card.dart';
-import 'package:fanpageapp/top_bar_title.dart';
-import 'package:fanpageapp/diary_entry_model.dart';
-import 'package:fanpageapp/pop_up_menu.dart';
-import 'package:fanpageapp/diary_entry_page.dart';
+import 'package:fanpageapp/message_entry_model.dart';
+import 'package:fanpageapp/message_entry_page.dart';
+
 
 class MessageCard extends StatelessWidget {
   const MessageCard({
     Key? key,
-    required this.diaryEntry,
+    required this.messageEntry,
   }) : super(key: key);
 
-  final DiaryEntry diaryEntry;
+  final MessageEntry messageEntry;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,7 @@ class MessageCard extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 30),
                             child: Text(
-                              diaryEntry.body,
+                              messageEntry.body,
                               maxLines: 3,
                               style: Theme.of(context)
                                   .textTheme
@@ -47,8 +44,8 @@ class MessageCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Spacer(),
-                    Divider(thickness: 1),
+                    const Spacer(),
+                    const Divider(thickness: 1),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 20,
@@ -59,8 +56,8 @@ class MessageCard extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return DiaryEntryPage.read(
-                                  diaryEntry: diaryEntry,
+                                return MessageEntryPage.read(
+                                  messageEntry: messageEntry,
                                 );
                               },
                             ),
