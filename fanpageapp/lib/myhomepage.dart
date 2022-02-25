@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:fanpageapp/loginpage.dart';
 import 'package:fanpageapp/top_bar_title.dart';
-import 'package:fanpageapp/diary_card.dart';
+import 'package:fanpageapp/message_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   //final String title;
 
@@ -18,9 +18,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void initState() {
-    super.initState();
+  @override
+  void initState(){
     _checkRole();
+    super.initState();
   }
 
   String role = "customer";
@@ -32,13 +33,15 @@ class _MyHomePageState extends State<MyHomePage> {
         .doc(user?.uid)
         .get();
     role = snap['role'];
-    print(role);
+    print(role + "1");
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final diaryEntries = Provider.of<List<DiaryEntry>>(context);
     if (role == "admin") {
+      print(role + "2");
       return Scaffold(
         appBar: AppBar(
           bottom: PreferredSize(
@@ -55,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 40),
                 if (diaryEntries != null)
                   for (var diaryData in diaryEntries)
-                    DiaryCard(diaryEntry: diaryData),
+                    MessageCard(diaryEntry: diaryData),
                 if (diaryEntries == null)
                   Center(child: CircularProgressIndicator()),
                 RichText(
@@ -88,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     } else {
+      print(role + "3");
       return Scaffold(
         appBar: AppBar(
           bottom: PreferredSize(
@@ -104,9 +108,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 40),
                 if (diaryEntries != null)
                   for (var diaryData in diaryEntries)
-                    DiaryCard(diaryEntry: diaryData),
+                    MessageCard(diaryEntry: diaryData),
                 if (diaryEntries == null)
                   Center(child: CircularProgressIndicator()),
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: 'Log Out',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LogInPage()));
+                          }),
+                  ]),
+                ),
               ],
             ),
           ),

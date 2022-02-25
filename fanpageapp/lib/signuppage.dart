@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/profilepage.dart';
+import 'package:fanpageapp/transitionpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -142,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (user != null){
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage())
+                                builder: (context) => TransitionPage())
                         );
                       }
                     },

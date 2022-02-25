@@ -1,26 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fanpageapp/diary_entry_button.dart';
-import 'package:fanpageapp/diary_card.dart';
+import 'package:fanpageapp/message_card.dart';
 import 'package:fanpageapp/top_bar_title.dart';
 import 'package:fanpageapp/diary_entry_model.dart';
 import 'package:fanpageapp/pop_up_menu.dart';
-import 'package:fanpageapp/emoji_helpers.dart';
 import 'package:fanpageapp/diary_entry_page.dart';
 
 class DiaryEntryButton extends StatelessWidget {
   const DiaryEntryButton({
     Key? key,
-    required this.titleController,
     required this.bodyTextController,
-    required String emoji,
     required this.widget,
-  })  : _emoji = emoji,
+  })  :
         super(key: key);
 
-  final TextEditingController titleController;
+
   final TextEditingController bodyTextController;
-  final String _emoji;
+
   final DiaryEntryPage widget;
 
   @override
@@ -31,9 +28,7 @@ class DiaryEntryButton extends StatelessWidget {
       onPressed: () {
         final id = widget.diaryEntry?.id ?? "";
         final diaryEntryMap = DiaryEntry(
-          title: titleController.text,
           body: bodyTextController.text,
-          emoji: _emoji,
           id: id,
         ).toMap();
 

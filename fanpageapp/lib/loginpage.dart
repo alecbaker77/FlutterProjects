@@ -1,9 +1,9 @@
-import 'package:fanpageapp/myhomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/profilepage.dart';
+import 'package:fanpageapp/transitionpage.dart';
 import 'package:fanpageapp/signuppage.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -16,7 +16,22 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
 
+  AccessToken? _accessToken;
 
+  Future<bool> _signInWithFacebook() async{
+    final LoginResult result = await FacebookAuth.instance.login(); // by default we request the email and the public profile
+// or FacebookAuth.i.login()
+    if (result.status == LoginStatus.success) {
+      // you are logged
+      //final AccessToken accessToken = result.accessToken!;
+      await FacebookAuth.i.getUserData();
+      return true;
+    } else {
+     print(result.status);
+     print(result.message);
+     return false;
+    }
+  }
   //login function
   static Future<User?> loginUsingEmailPassword({required String email, required String password, required BuildContext context}) async{
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -86,23 +101,6 @@ class _LogInPageState extends State<LogInPage> {
                 const SizedBox(
                     height: 12.0
                 ),
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                        text: 'Sign Up',
-                        style: TextStyle(
-                          color: Colors.blue,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage())
-                            );
-                          }),
-                  ]),
-                ),
                 const SizedBox(
                     height: 12.0
                 ),
@@ -121,14 +119,14 @@ class _LogInPageState extends State<LogInPage> {
                       if (user != null){
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage())
+                                builder: (context) => TransitionPage())
                         );
                       } else {
 
                       }
                     },
                     child: const Text(
-                        "Login",
+                        "Log In",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
@@ -136,6 +134,70 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                   ),
                 ),
+                const SizedBox(
+                    height: 12.0
+                ),
+                Container(
+                  width: double.infinity,
+                  child: RawMaterialButton(
+                    fillColor: const Color(0xFF0069FE),
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    onPressed: () async {
+                      bool success = await _signInWithFacebook();
+
+                      if (success){
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => TransitionPage())
+                        );
+                      } else {
+
+                      }
+                    },
+                    child: const Text(
+                        "Log In with Facebook",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        )
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                    height: 12.0
+                ),
+                Container(
+                  width: double.infinity,
+                  child: RawMaterialButton(
+                    fillColor: const Color(0xFF0069FE),
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    onPressed: () async {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage())
+                        );
+                    },
+                    child: const Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        )
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                    height: 12.0
+                ),
+
               ]
           )
       )

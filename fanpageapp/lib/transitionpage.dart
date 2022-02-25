@@ -1,14 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:fanpageapp/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fanpageapp/myhomepage.dart';
 import 'package:fanpageapp/diary_entry_model.dart';
-import 'package:fanpageapp/pop_up_menu.dart';
 import 'package:fanpageapp/diary_entry_page.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class TransitionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final diaryCollection = FirebaseFirestore.instance.collection('messages');
@@ -20,11 +17,11 @@ class ProfilePage extends StatelessWidget {
       initialData: [],
       create: (_) => diaryStream,
       child: MaterialApp(
-        title: 'My Diary',
+        title: "Alec Baker's Fanpage",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.indigo,
-          accentColor: Colors.pink,
+          secondaryHeaderColor: Colors.pink,
         ),
         initialRoute: '/',
         routes: {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fanpageapp/diary_entry_button.dart';
-import 'package:fanpageapp/diary_card.dart';
+import 'package:fanpageapp/message_card.dart';
 import 'package:fanpageapp/top_bar_title.dart';
 import 'package:fanpageapp/diary_entry_model.dart';
 import 'package:fanpageapp/pop_up_menu.dart';
 import 'package:fanpageapp/diary_entry_page.dart';
 
-class DiaryCard extends StatelessWidget {
-  const DiaryCard({
+class MessageCard extends StatelessWidget {
+  const MessageCard({
     Key? key,
     required this.diaryEntry,
   }) : super(key: key);
@@ -24,20 +24,6 @@ class DiaryCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              AspectRatio(
-                aspectRatio: 1.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.lightGreen.shade100,
-                  ),
-                  child: Center(
-                    child: Text(
-                      diaryEntry.emoji,
-                      style: TextStyle(fontSize: 100),
-                    ),
-                  ),
-                ),
-              ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,16 +33,6 @@ class DiaryCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                diaryEntry.title,
-                                style: Theme.of(context).textTheme.headline5,
-                              ),
-                              PopUpMenu(diaryEntry: diaryEntry)
-                            ],
-                          ),
                           Padding(
                             padding: const EdgeInsets.only(right: 30),
                             child: Text(
