@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class MessageEntry {
-   String body;
-   String id;
+  String body;
+  String id;
   MessageEntry({
     required this.body,
     required this.id,

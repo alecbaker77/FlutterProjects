@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/message_entry_model.dart';
-import 'package:fanpageapp/message_entry_page.dart';
+import 'package:chatapp/message_entry_model.dart';
+import 'package:chatapp/message_entry_page.dart';
 
 class MessageEntryButton extends StatelessWidget {
   const MessageEntryButton({
@@ -33,7 +33,7 @@ class MessageEntryButton extends StatelessWidget {
           FirebaseFirestore.instance.collection('messages').add(messageEntryMap);
         } else {
           FirebaseFirestore.instance
-              .collection('messages')
+              .collection('chats')
               .doc(id)
               .update(messageEntryMap);
         }

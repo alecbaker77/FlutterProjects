@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/message_entry_model.dart';
-import 'package:fanpageapp/message_entry_page.dart';
+import 'package:chatapp/message_entry_model.dart';
+import 'package:chatapp/message_entry_page.dart';
 
 
 class MessageCard extends StatelessWidget {
@@ -38,7 +38,7 @@ class MessageCard extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .subtitle2,
-                                  //.copyWith(height: 1.75),
+                              //.copyWith(height: 1.75),
                             ),
                           ),
                         ],

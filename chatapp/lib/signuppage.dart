@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/transitionpage.dart';
+import 'package:chatapp/transitionpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -29,14 +29,13 @@ class _SignUpPageState extends State<SignUpPage> {
         DateTime currentPhoneDate = DateTime.now(); //DateTime
         Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate); //To TimeStamp
         DateTime myDateTime = myTimeStamp.toDate();
-        await FirebaseFirestore.instance.collection("fanpageusers").doc(firestoreUser.uid).set({
+        await FirebaseFirestore.instance.collection("chatappusers").doc(firestoreUser.uid).set({
           'uid': firestoreUser.uid,
-          'firstName': firstName,
-          'lastName': lastName,
-          'role': role,
+          'userName': firstName + "." + lastName,
+          'userEmail': email,
           'registrationDatetime':  myDateTime,
-       });
-    }
+        });
+      }
     } on FirebaseAuthException catch (e){
       print (e) ;
     }
@@ -52,111 +51,111 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController _firstNameController = TextEditingController();
     TextEditingController _lastNameController = TextEditingController();
     return Scaffold(
-      body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Alec Baker Fanpage",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Text(
-                  "Create an Account",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 44.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 44.0,
-                ),
-                TextField( // field for first name
-                  controller: _firstNameController,
-                  decoration: const InputDecoration(
-                    hintText: "First Name",
-                    prefixIcon: Icon(Icons.account_circle, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(
-                    height: 26.0
-                ),
-                TextField( // field for last name
-                  controller: _lastNameController,
-                  decoration: const InputDecoration(
-                    hintText: "Last Name",
-                    prefixIcon: Icon(Icons.account_circle, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(
-                    height: 26.0
-                ),
-                TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    hintText: "User Email",
-                    prefixIcon: Icon(Icons.mail, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(
-                    height: 26.0
-                ),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: "User Password",
-                    prefixIcon: Icon(Icons.lock, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(
-                    height: 12.0
-                ),
-                Container(
-                  width: double.infinity,
-                  child: RawMaterialButton(
-                    fillColor: const Color(0xFF0069FE),
-                    elevation: 0.0,
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Alec Baker Chat App",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                    onPressed: () async {
-                      User? user = await createUserWithEmailAndPassword(
-                          firstName: _firstNameController.text,
-                          lastName: _lastNameController.text,
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                          role: 'customer',
-                          context: context
-                      );
-
-                      if (user != null){
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => TransitionPage())
+                  ),
+                  const Text(
+                    "Create an Account",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 44.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 44.0,
+                  ),
+                  TextField( // field for first name
+                    controller: _firstNameController,
+                    decoration: const InputDecoration(
+                      hintText: "First Name",
+                      prefixIcon: Icon(Icons.account_circle, color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                      height: 26.0
+                  ),
+                  TextField( // field for last name
+                    controller: _lastNameController,
+                    decoration: const InputDecoration(
+                      hintText: "Last Name",
+                      prefixIcon: Icon(Icons.account_circle, color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                      height: 26.0
+                  ),
+                  TextField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: "User Email",
+                      prefixIcon: Icon(Icons.mail, color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                      height: 26.0
+                  ),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: "User Password",
+                      prefixIcon: Icon(Icons.lock, color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                      height: 12.0
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: RawMaterialButton(
+                      fillColor: Colors.indigo,
+                      elevation: 0.0,
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      onPressed: () async {
+                        User? user = await createUserWithEmailAndPassword(
+                            firstName: _firstNameController.text,
+                            lastName: _lastNameController.text,
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            role: 'customer',
+                            context: context
                         );
-                      }
-                    },
-                    child: const Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                        )
+
+                        if (user != null){
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => TransitionPage())
+                          );
+                        }
+                      },
+                      child: const Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                          )
+                      ),
                     ),
                   ),
-                ),
-              ]
-          )
-      )
+                ]
+            )
+        )
     );
 
 

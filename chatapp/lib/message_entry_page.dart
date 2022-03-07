@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fanpageapp/message_entry_button.dart';
-import 'package:fanpageapp/message_entry_model.dart';
+import 'package:chatapp/message_entry_button.dart';
+import 'package:chatapp/message_entry_model.dart';
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,25 +40,9 @@ class _MessageEntryPageState extends State<MessageEntryPage> {
 
   String role = "customer";
 
-  void _checkRole() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    final DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('fanpageusers')
-        .doc(user?.uid)
-        .get();
-    role = snap['role'];
-    print(role);
-    if (role == "admin") {
-      isReadOnly = false;
-    }else {
-      isReadOnly = true;
-    }
-    setState(() {});
-  }
   @override
   void initState() {
     bodyTextController = TextEditingController(text: widget.messageEntry?.body ?? '');
-    _checkRole();
 
     super.initState();
   }
@@ -86,14 +70,14 @@ class _MessageEntryPageState extends State<MessageEntryPage> {
                   style: Theme.of(context)
                       .textTheme
                       .headline6,
-                      //.copyWith(color: Colors.black87, height: 1.7),
+                  //.copyWith(color: Colors.black87, height: 1.7),
                   decoration: InputDecoration.collapsed(
                     hintText: 'Type your message here.',
                     border: InputBorder.none,
                     hintStyle: Theme.of(context)
                         .textTheme
                         .headline6,
-                        //.copyWith(color: Colors.grey.shade400),
+                    //.copyWith(color: Colors.grey.shade400),
                   ),
                 ),
                 const SizedBox(height: 100)
@@ -106,9 +90,9 @@ class _MessageEntryPageState extends State<MessageEntryPage> {
       floatingActionButton: isReadOnly
           ? const SizedBox()
           : MessageEntryButton(
-              bodyTextController: bodyTextController,
-              widget: widget,
-            ),
+        bodyTextController: bodyTextController,
+        widget: widget,
+      ),
     );
   }
 
@@ -120,3 +104,4 @@ class _MessageEntryPageState extends State<MessageEntryPage> {
 }
 
 enum MessageAction { edit, add, read }
+

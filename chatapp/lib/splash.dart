@@ -1,4 +1,4 @@
-import 'package:fanpageapp/loginpage.dart';
+import 'package:chatapp/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -29,8 +29,9 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Alec Baker's Fan Page"),
+        title: const Text("Alec Baker's Chat App"),
         centerTitle: true,
+        backgroundColor: Colors.indigo,
       ),
       body: Center(
         child: Container(
