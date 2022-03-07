@@ -1,12 +1,6 @@
 {
-  "functions": {
-    "predeploy": [
-
-    ],
-    "source": "functions"
-  },
   "hosting": {
-    "public": "build/web",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",

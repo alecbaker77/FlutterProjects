@@ -1,4 +1,4 @@
-# fanpageapp
+# chatapp
 
 A new Flutter project.
 
