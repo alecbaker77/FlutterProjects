@@ -116,6 +116,9 @@ class _ChatState extends State<Chat> {
           child: Stack(
             children: [
               chatMessages(),
+              SizedBox(
+                height: 30
+              ),
               Container(
                 alignment: Alignment.bottomCenter,
                 width: MediaQuery.of(context).size.width,
@@ -126,8 +129,12 @@ class _ChatState extends State<Chat> {
                     children: [
                       Expanded(
                           child: TextField(
-                        controller: messageEditingController,
-                        style: simpleTextStyle(),
+                            onSubmitted: (value){
+                              addMessage();
+                            },
+                            textInputAction: TextInputAction.search,
+                          controller: messageEditingController,
+                          style: simpleTextStyle(),
                         decoration: InputDecoration(
                             hintText: "Message ...",
                             hintStyle: TextStyle(
@@ -135,7 +142,8 @@ class _ChatState extends State<Chat> {
                               fontSize: 16,
                             ),
                             border: InputBorder.none),
-                      )),
+                       )
+                      ),
                       SizedBox(
                         width: 16,
                       ),

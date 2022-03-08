@@ -150,6 +150,10 @@ class _SearchState extends State<Search> {
                       children: [
                         Expanded(
                           child: TextField(
+                            onSubmitted: (value){
+                              initiateSearch();
+                            },
+                            textInputAction: TextInputAction.search,
                             controller: searchEditingController,
                             style: simpleTextStyle(),
                             decoration: InputDecoration(

@@ -23,7 +23,6 @@ class _ProfileState extends State<Profile> {
 
 
 
-
   Widget userTile(String userName, String userEmail) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),

@@ -162,7 +162,8 @@ class DatabaseMethods {
       }
     }
 
-    rating = rating / index;
+    rating = double.parse((rating / index).toStringAsFixed(2));
+
     return rating;
 
 
@@ -186,7 +187,7 @@ class DatabaseMethods {
       }
     }
 
-    rating = rating / index;
+    rating = double.parse((rating / index).toStringAsFixed(2));
     print("RATINGGGG for CHATROOM ------" + rating.toString());
     return rating;
   }

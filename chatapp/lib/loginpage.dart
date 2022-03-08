@@ -76,6 +76,17 @@ class _LogInPageState extends State<LogInPage> {
                       height: 26.0
                   ),
                   TextField(
+                    onSubmitted: (value)async{
+                      User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
+                      print(user);
+                      if (user != null){
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => TransitionPage())
+                        );
+                      }
+                    },
+                    textInputAction: TextInputAction.search,
                     controller: _passwordController,
                     obscureText: true,
                     decoration: const InputDecoration(
